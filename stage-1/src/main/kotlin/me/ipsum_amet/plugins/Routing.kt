@@ -35,8 +35,8 @@ fun Application.configureRouting() {
                     currentDay = currentDayOfWeek.toString(),
                     track = track,
                     utcTime = utcTime,
-                    githubFileUrl = "TODO",
-                    githubRepoUrl = "TODO",
+                    githubFileUrl = "https://github.com/kibetrns/HNGx-Backend/blob/main/stage-1/src/main/kotlin/me/ipsum_amet/Application.kt",
+                    githubRepoUrl = "https://github.com/kibetrns/HNGx-Backend/tree/main/stage-1",
                     statusCode = HttpStatusCode.OK.value
                 )
 
