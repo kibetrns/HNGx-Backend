@@ -29,15 +29,14 @@ fun Application.configureRouting() {
 
                 val utcTime = currentDateTime.toString()
 
-
                 val response = Stage1Response(
-                    slackName = slackName,
-                    currentDay = currentDayOfWeek.toString(),
+                    slack_name = slackName,
+                    current_day = currentDayOfWeek.toString(),
                     track = track,
-                    utcTime = utcTime,
-                    githubFileUrl = "https://github.com/kibetrns/HNGx-Backend/blob/main/stage-1/src/main/kotlin/me/ipsum_amet/Application.kt",
-                    githubRepoUrl = "https://github.com/kibetrns/HNGx-Backend/tree/main/stage-1",
-                    statusCode = HttpStatusCode.OK.value
+                    utc_time = utcTime,
+                    github_file_url = "https://github.com/kibetrns/HNGx-Backend/blob/main/stage-1/src/main/kotlin/me/ipsum_amet/Application.kt",
+                    github_repo_url = "https://github.com/kibetrns/HNGx-Backend/tree/main/stage-1",
+                    status_code = HttpStatusCode.OK.value
                 )
 
                 call.respond(HttpStatusCode.OK, response)
@@ -51,11 +50,11 @@ fun Application.configureRouting() {
 
 @Serializable
 data class Stage1Response(
-    val slackName: String?,
-    val currentDay: String?,
-    val utcTime: String?,
+    val slack_name: String?,
+    val current_day: String?,
+    val utc_time: String?,
     val track: String?,
-    val githubFileUrl: String?,
-    val githubRepoUrl: String?,
-    val statusCode: Int
+    val github_file_url: String?,
+    val github_repo_url: String?,
+    val status_code: Int
 )
