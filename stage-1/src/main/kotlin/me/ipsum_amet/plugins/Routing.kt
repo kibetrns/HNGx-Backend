@@ -4,10 +4,11 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.*
 
 fun Application.configureRouting() {
     routing {
@@ -23,17 +24,21 @@ fun Application.configureRouting() {
 
                 val track = queryParameters["track"]
 
-                val currentDateTime = Clock.System.now()
+                val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                val dateTime = LocalDateTime.now()
+                val formattedUTCTime = dateTime.format(dateTimeFormatter)
 
-                val currentDayOfWeek = currentDateTime.toLocalDateTime(TimeZone.UTC).dayOfWeek
 
-                val utcTime = currentDateTime.toString()
+
+                val dayOfWeek = dateTime.dayOfWeek
+                val dayOfWeekText = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
+
 
                 val response = Stage1Response(
                     slack_name = slackName,
-                    current_day = currentDayOfWeek.toString(),
+                    current_day = dayOfWeekText,
                     track = track,
-                    utc_time = utcTime,
+                    utc_time = formattedUTCTime,
                     github_file_url = "https://github.com/kibetrns/HNGx-Backend/blob/main/stage-1/src/main/kotlin/me/ipsum_amet/Application.kt",
                     github_repo_url = "https://github.com/kibetrns/HNGx-Backend/tree/main/stage-1",
                     status_code = HttpStatusCode.OK.value
